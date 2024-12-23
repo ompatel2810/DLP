@@ -1,0 +1,19 @@
+number of input symbols : 2
+input symbols : a b
+Enter number of state : 4
+Initial state : 1
+Number of accepting states: 1
+Accepting stares : 2
+Transition table:
+1 to a -> 2
+1 to b -> 3
+2 to a -> 1
+2 to b -> 4
+3 to a -> 4
+3 to b -> 1
+4 to a -> 3
+4 to b -> 2
+
+input sting : abbabab
+
+
