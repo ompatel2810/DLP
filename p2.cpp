@@ -4,59 +4,50 @@
 using namespace std;
 
 int main() {
-
-     // Transition table
-    int numSymbols;
+    int inp_sta;
     cout << "Enter the number of input symbols: ";
-    cin >> numSymbols;
+    cin >> inp_sta;
 
-    vector<char> symbols(numSymbols);
+    vector<char> symbols(inp_sta);
     cout << "Enter the input symbols: ";
-    for (int i = 0; i < numSymbols; i++) {
+    for (int i = 0; i < inp_sta; i++) {
         cin >> symbols[i];
     }
-
-    // Number of states and initial state
-    int numStates;
+    int tot_state;
     cout << "Enter the number of states: ";
-    cin >> numStates;
+    cin >> tot_state;
 
-    int initialState;
+    int intstate;
     cout << "Enter the initial state: ";
-    cin >> initialState;
+    cin >> intstate;
 
-    // Accepting states
-    int numAcceptingStates;
+    int totalAccState;
     cout << "Enter the number of accepting states: ";
-    cin >> numAcceptingStates;
+    cin >> totalAccState;
 
-    vector<int> acceptingStates(numAcceptingStates);
+    vector<int> accsates(totalAccState);
     cout << "Enter the accepting states: ";
-    for (int i = 0; i < numAcceptingStates; i++) {
-        cin >> acceptingStates[i];
+    for (int i = 0; i < totalAccState; i++) {
+        cin >> accsates[i];
     }
 
    
-    vector<vector<int>> transitions(numStates + 1, vector<int>(numSymbols));
-    cout << "Enter the transition table (state to symbol -> next state):\n";
-    for (int state = 1; state <= numStates; state++) {
-        for (int sym = 0; sym < numSymbols; sym++) {
+    vector<vector<int>> trans(tot_state + 1, vector<int>(inp_sta));
+    cout << "Enter the transition table \n";
+    for (int state = 1; state <= tot_state; state++) {
+        for (int sym = 0; sym < inp_sta; sym++) {
             cout << "State " << state << " to symbol '" << symbols[sym] << "': ";
-            cin >> transitions[state][sym];
+            cin >> trans[state][sym];
         }
     }
-
-    // Input string
     string input;
     cout << "Enter an input string: ";
     cin >> input;
 
-    // Start processing the input string
-    int currentState = initialState;
+    int curstate = intstate;
     for (char c : input) {
-        // Determine the column index for the symbol
         int symbolIndex = -1;
-        for (int i = 0; i < numSymbols; i++) {
+        for (int i = 0; i < inp_sta; i++) {
             if (c == symbols[i]) {
                 symbolIndex = i;
                 break;
@@ -67,24 +58,21 @@ int main() {
             cout << "The string is not valid (invalid symbol encountered).\n";
             return 0;
         }
-
-        // Transition to the next state
-        currentState = transitions[currentState][symbolIndex];
+        curstate = trans[curstate][symbolIndex];
     }
 
-    // Check if the final state is an accepting state
-    bool isAccepted = false;
-    for (int i = 0; i < numAcceptingStates; i++) {
-        if (currentState == acceptingStates[i]) {
-            isAccepted = true;
+    bool isaccp = false;
+    for (int i = 0; i < totalAccState; i++) {
+        if (curstate == accsates[i]) {
+            isaccp = true;
             break;
         }
     }
 
-    if (isAccepted) {
-        cout << "The string is accepted by the finite automaton.\n";
+    if (isaccp) {
+        cout << "string is accept\n";
     } else {
-        cout << "The string is not accepted by the finite automaton.\n";
+        cout << "string is not accept";
     }
 
     return 0;

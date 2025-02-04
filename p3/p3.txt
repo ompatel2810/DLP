@@ -1,0 +1,18 @@
+int main(){
+    int a = 5, 7H;
+    // assign vakue
+    char b='x';
+    /* retrun 
+    value*/
+    // ffff
+    return a+b;
+}
+
+
+LEXICAL ERRORS
+7H invalid lexeme
+
+SYMBOL TABLE
+ENTRIES
+1)a
+2)b
