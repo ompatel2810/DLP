@@ -13,25 +13,17 @@ unordered_set<string> keywords = {"int", "char", "return", "if", "else", "while"
 unordered_set<char> operators = {'+', '-', '*', '/', '=', '%', '>', '<', '!'};
 
 unordered_set<char> punctuation = {';', ',', '(', ')', '{', '}', '[', ']'};
-
-// Function to check if a string is a keyword
 bool isKeyword(const string& word) {
     return keywords.find(word) != keywords.end();
 }
-
-// Function to check if a string is an identifier
 bool isIdentifier(const string& word) {
     return regex_match(word, regex("[a-zA-Z_][a-zA-Z0-9_]*"));
 }
-
-// Function to check if a string is a constant
 bool isConstant(const string& word) {
     return regex_match(word, regex("[0-9]+"));
 }
-
-// Function to process input and tokenize it
-void lexa(const string& filename) {
-    ifstream file(filename);
+void lexa(const string& fm) {
+    ifstream file(fm);
     if (!file.is_open()) {
         cout << "Error: Could not open file." << endl;
         return;
@@ -78,8 +70,6 @@ void lexa(const string& filename) {
             cout << "Operator: " << ch << endl;
             continue;
         }
-
-        // Identify identifiers, keywords, or constants
         if (isalnum(ch) || ch == '_') {
             token = ch;
             while (file.get(ch) && (isalnum(ch) || ch == '_')) {
@@ -100,7 +90,6 @@ void lexa(const string& filename) {
             continue;
         }
 
-        // Identify strings
         if (ch == '\'') {
             token = "";
             while (file.get(ch) && ch != '\'') {
@@ -112,8 +101,6 @@ void lexa(const string& filename) {
     }
     
     file.close();
-
-    // Display lexical errors
     if (!errors.empty()) {
         cout << "\nLEXICAL ERRORS" << endl;
         for (const auto& err : errors) {
@@ -132,7 +119,7 @@ void lexa(const string& filename) {
 }
 
 int main() {
-    string filename = "practical3.txt"; // Provide the input file name
-    lexa(filename);
+    string fm = "practical3.txt"; 
+    lexa(fm);
     return 0;
 }
